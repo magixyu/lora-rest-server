@@ -1,0 +1,2 @@
+include ':lora-database-api'
+project(':lora-database-api').projectDir = new File(settingsDir, '../lora-database-api')
