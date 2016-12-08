@@ -22,8 +22,9 @@ import lorapp.db.entity.UploadMessage;
 import lorapp.db.entity.component.AppDevMap;
 import lorapp.db.repo.UploadMessageRepo;
 
+
 @RestController
-@RequestMapping(value = "/rawdata/")
+@RequestMapping("/rawdata/")
 @Api(value = "Rawdata Interface")
 public class RawdataController {
 
@@ -62,4 +63,5 @@ public class RawdataController {
 			@RequestParam("to") @DateTimeFormat(pattern = "yyyy-MM-dd") Date to) {
 		return umRepo.findAllByDevAppMapAndReceiveTimeBetween(new AppDevMap(appEUI, devEUI), from, to);
 	}
+
 }
