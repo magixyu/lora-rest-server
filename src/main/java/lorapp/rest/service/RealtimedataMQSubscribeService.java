@@ -16,11 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * @Author MoseC
- * @Desc
- * @Date 2016/12/7
- */
 @RabbitListener(queues = "rawdata")
 @Component(value = "realtimedataMQSubscribeService")
 public class RealtimedataMQSubscribeService {

@@ -2,13 +2,9 @@ package lorapp.rest.websocket;
 
 import lorapp.db.entity.UploadMessage;
 import lorapp.rest.handler.MsgHandler;
-import lorapp.rest.service.JacksonService;
 import lorapp.rest.service.RealtimedataMQSubscribeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -17,26 +13,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author MoseC
- * @Desc
- * @Date 2016/12/7
- */
 @ServerEndpoint(value="/websocket/realtimedata")
 @Component
 public class RealtimedataWebSocket implements MsgHandler{
     private static final Logger LOGGER = LoggerFactory.getLogger(RealtimedataWebSocket.class);
 
-    private static int onlineCount = 0;
     private Session session;
     private static final String APP_EUI_PARAM = "appEui";
     private static final String DEV_EUI_PARAM = "devEui";
     private String appEuiTag;
     private String devEuiTag;
 
-
-    @Autowired
-    private JacksonService jacksonService;
 
     @OnOpen
     public void onOpen(Session session){
@@ -57,17 +44,11 @@ public class RealtimedataWebSocket implements MsgHandler{
         this.devEuiTag = paramVal4DevEui;
 
         RealtimedataMQSubscribeService.registerMsgHandler(this);
-        addOnlineCount();
-
-        LOGGER.info("A new realtime data related web socket connection connected to server, current online realtime data web socket num is " + getOnlineCount());
     }
 
     @OnClose
     public void onClose(){
         RealtimedataMQSubscribeService.unregisterMsgHandler(this);
-        subOnlineCount();
-
-        LOGGER.info("A realtime data related web socket closed from server, current online realtime data web socket num is " + getOnlineCount());
     }
 
     @OnMessage
@@ -94,19 +75,6 @@ public class RealtimedataWebSocket implements MsgHandler{
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
-    }
-
-
-    public static synchronized int getOnlineCount() {
-        return onlineCount;
-    }
-
-    public static synchronized void addOnlineCount() {
-        onlineCount++;
-    }
-
-    public static synchronized void subOnlineCount() {
-        onlineCount--;
     }
 
 }

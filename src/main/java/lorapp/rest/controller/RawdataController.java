@@ -1,26 +1,17 @@
 package lorapp.rest.controller;
 
+import io.swagger.annotations.*;
+import lorapp.db.entity.UploadMessage;
+import lorapp.db.entity.component.AppDevMap;
+import lorapp.db.repo.UploadMessageRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import lorapp.db.entity.UploadMessage;
-import lorapp.db.entity.component.AppDevMap;
-import lorapp.db.repo.UploadMessageRepo;
 
 
 @RestController
