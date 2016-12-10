@@ -22,7 +22,7 @@ public class RealtimedataMQSubscribeService {
     @Value("${lora.rawdata.exchange}")
     private String exch;
 
-    private static CopyOnWriteArraySet<MsgHandler> msgHandlerSet = new CopyOnWriteArraySet<MsgHandler>();
+    private CopyOnWriteArraySet<MsgHandler> msgHandlerSet = new CopyOnWriteArraySet<MsgHandler>();
 
     @Autowired(required = true)
     JacksonService jacksonService;
@@ -50,11 +50,11 @@ public class RealtimedataMQSubscribeService {
         }
     }
 
-    public static void registerMsgHandler(MsgHandler msgHandler){
+    public void registerMsgHandler(MsgHandler msgHandler){
         msgHandlerSet.add(msgHandler);
     }
 
-    public static void unregisterMsgHandler(MsgHandler msgHandler){
+    public void unregisterMsgHandler(MsgHandler msgHandler){
         msgHandlerSet.remove(msgHandler);
     }
 }
