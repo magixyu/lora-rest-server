@@ -12,13 +12,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
-import static org.apache.http.client.methods.RequestBuilder.put;
-
-/**
- * @Author MoseC
- * @Desc
- * @Date 2016/12/11
- */
 
 @RestController
 @RequestMapping(value = "/user")
@@ -43,10 +36,15 @@ public class UserController {
         CommonResult commRes = new CommonResult();
 
         try {
-            String passwd = getMD5Code(user.getPasswd());
-            user.setPasswd(passwd);
-            userRepo.save(user);
-            commRes.setSuccess(true);
+            User existingUser = userRepo.findByUserName(user.getUserName());
+            if(existingUser != null){
+                commRes.setErrorMsg("用户名已存在");
+            }else{
+                String passwd = getMD5Code(user.getPasswd());
+                user.setPasswd(passwd);
+                userRepo.save(user);
+                commRes.setSuccess(true);
+            }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             commRes.setErrorMsg(e.getMessage());
