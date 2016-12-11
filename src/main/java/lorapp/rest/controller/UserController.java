@@ -6,6 +6,7 @@ import lorapp.rest.util.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public CommonResult addUser(@RequestBody User user){
+    public CommonResult addUser(@Validated @RequestBody User user){
         CommonResult commRes = new CommonResult();
 
         try {
@@ -61,7 +62,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{userName}", method = RequestMethod.POST)
-    public CommonResult updateUser(@RequestBody final User user){
+    public CommonResult updateUser(@Validated @RequestBody final User user){
         CommonResult commRes = new CommonResult();
 
         try {
