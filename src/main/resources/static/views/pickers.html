@@ -1,0 +1,318 @@
+﻿????<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="#/dashboard.html">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#/pickers">设置</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#/pickers">终端设置</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+    <div style="height:700px;width:20%;float:left;margin:0,0,0;padding-right:0,0,0">
+        <div class="col-md-3"  style="width:100%;height:100%">
+            <div class="portlet light bordered"  style="width:100%;height:100%">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-cogs font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp bold uppercase">传感器终端</span>
+                    </div>
+                    <!-- <div class="tools">
+                         <a href="javascript:;" class="collapse"> </a>
+                         <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                         <a href="javascript:;" class="reload"> </a>
+                         <a href="javascript:;" class="remove"> </a>
+                     </div>-->
+                </div>
+                <div class="portlet-body">
+                    <div id="tree_2" class="tree-demo">
+                        <ul>
+                            <li> 西片区
+                                <ul>
+                                    <li data-jstree='{ "selected" : true }'>
+                                        <a href="javascript:;"> 传感器001</a>
+                                    </li>
+                                    <li data-jstree='{ "icon" : "fa fa-briefcase icon-state-success " }'> 传感器004 </li>
+                                    <li data-jstree='{ "opened" : true }'> 传感器002
+                                        <ul>
+                                            <li data-jstree='{ "disabled" : true }'> 东片区</li>
+                                            <li data-jstree='{ "type" : "file" }'>传感器003 </li>
+                                        </ul>
+                                    </li>
+                                    <li data-jstree='{ "icon" : "fa fa-warning icon-state-danger" }'> 传感器005 </li>
+                                </ul>
+                            </li>
+                            <li data-jstree='{ "type" : "file" }'>
+                                <a href="http://www.jstree.com"> 东区 </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-6">
+             <div class="portlet light bordered">
+                 <div class="portlet-title">
+                     <div class="caption">
+                         <i class="fa fa-cogs font-green-sharp"></i>
+                         <span class="caption-subject font-green-sharp bold uppercase">Checkable Tree</span>
+                     </div>
+                     <div class="tools">
+                         <a href="javascript:;" class="collapse"> </a>
+                         <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                         <a href="javascript:;" class="reload"> </a>
+                         <a href="javascript:;" class="remove"> </a>
+                     </div>
+                 </div>
+                 <div class="portlet-body">
+                     <div id="tree_2" class="tree-demo"> </div>
+                 </div>
+             </div>
+         </div>-->
+    </div>
+    <div style="height:700px;width:80%;float:left;margin:0,0,0;padding-right:0,0,0">
+    <div class="col-md-12" style="height:700px">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered form-fit" >
+            <div class="portlet-title" style="height:80px">
+                <div class="caption">
+                    <i class="fa fa-cogs font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp bold uppercase">终端设置</span>
+                    <span class="caption-helper">alert samples...</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="#" data-toggle="modal" class="config"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form" style="height:620px">
+                <!-- BEGIN FORM-->
+                <form action="#" class="form-horizontal form-bordered form-row-stripped">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">系统名称</label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="请填写系统名称" class="form-control" />
+                                <span class="help-block"> 系统名称 </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">温度报警阈值</label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="请填写温度报警阈值" class="form-control" />
+                                <span class="help-block">温度报警阈值</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">CO2报警阈值</label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="请填写CO2报警阈值" class="form-control" />
+                                <span class="help-block">CO2报警阈值</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">红外线报警阈值</label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="请填写红外线报警阈值" class="form-control" />
+                                <span class="help-block">红外线报警阈值</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">紫外线报警阈值</label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="请填写紫外线报警阈值" class="form-control" />
+                                <span class="help-block">紫外线报警阈值</span>
+                            </div>
+                        </div>
+                        <!--  <div class="form-group">
+                              <label class="control-label col-md-3">Gender</label>
+                              <div class="col-md-9">
+                                  <select class="form-control">
+                                      <option value="">Male</option>
+                                      <option value="">Female</option>
+                                  </select>
+                                  <span class="help-block"> Select your gender. </span>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Date of Birth</label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control" placeholder="dd/mm/yyyy"> </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Category</label>
+                              <div class="col-md-9">
+                                  <select class="form-control select2_category">
+                                      <option value="Category 1">Category 1</option>
+                                      <option value="Category 2">Category 2</option>
+                                      <option value="Category 3">Category 5</option>
+                                      <option value="Category 4">Category 4</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Multi-Value Select</label>
+                              <div class="col-md-9">
+                                  <select class="form-control select2_sample1" multiple>
+                                      <optgroup label="NFC EAST">
+                                          <option>Dallas Cowboys</option>
+                                          <option>New York Giants</option>
+                                          <option>Philadelphia Eagles</option>
+                                          <option>Washington Redskins</option>
+                                      </optgroup>
+                                      <optgroup label="NFC NORTH">
+                                          <option>Chicago Bears</option>
+                                          <option>Detroit Lions</option>
+                                          <option>Green Bay Packers</option>
+                                          <option>Minnesota Vikings</option>
+                                      </optgroup>
+                                      <optgroup label="NFC SOUTH">
+                                          <option>Atlanta Falcons</option>
+                                          <option>Carolina Panthers</option>
+                                          <option>New Orleans Saints</option>
+                                          <option>Tampa Bay Buccaneers</option>
+                                      </optgroup>
+                                      <optgroup label="NFC WEST">
+                                          <option>Arizona Cardinals</option>
+                                          <option>St. Louis Rams</option>
+                                          <option>San Francisco 49ers</option>
+                                          <option>Seattle Seahawks</option>
+                                      </optgroup>
+                                      <optgroup label="AFC EAST">
+                                          <option>Buffalo Bills</option>
+                                          <option>Miami Dolphins</option>
+                                          <option>New England Patriots</option>
+                                          <option>New York Jets</option>
+                                      </optgroup>
+                                      <optgroup label="AFC NORTH">
+                                          <option>Baltimore Ravens</option>
+                                          <option>Cincinnati Bengals</option>
+                                          <option>Cleveland Browns</option>
+                                          <option>Pittsburgh Steelers</option>
+                                      </optgroup>
+                                      <optgroup label="AFC SOUTH">
+                                          <option>Houston Texans</option>
+                                          <option>Indianapolis Colts</option>
+                                          <option>Jacksonville Jaguars</option>
+                                          <option>Tennessee Titans</option>
+                                      </optgroup>
+                                      <optgroup label="AFC WEST">
+                                          <option>Denver Broncos</option>
+                                          <option>Kansas City Chiefs</option>
+                                          <option>Oakland Raiders</option>
+                                          <option>San Diego Chargers</option>
+                                      </optgroup>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Membership</label>
+                              <div class="col-md-9">
+                                  <div class="radio-list">
+                                      <label>
+                                          <input type="radio" name="optionsRadios2" value="option1" /> Free </label>
+                                      <label>
+                                          <input type="radio" name="optionsRadios2" value="option2" checked/> Professional </label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Street</label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control"> </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">City</label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control"> </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">State</label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control"> </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Post Code</label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control"> </div>
+                          </div>
+                          <div class="form-group last">
+                              <label class="control-label col-md-3">Country</label>
+                              <div class="col-md-9">
+                                  <select class="form-control"> </select>
+                              </div>
+                          </div>-->
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">
+                                    <i class="fa fa-check"></i> 保存</button>
+                                <button type="button" class="btn default">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+    </div>
+</div>
+
+<!-- END MAIN CONTENT -->
+<script>
+    ComponentsDateTimePickers.init(); // init todo page
+</script>
+<script>
+    UITree.init(); // init todo page
+</script>

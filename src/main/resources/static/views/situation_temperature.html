@@ -1,0 +1,812 @@
+
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/ng_ui_bootstrap.html">首页</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#/ng_ui_bootstrap.html">态势图</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> 操作
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i>添加用户 </a>
+                </li>
+              <!--  <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!--<h3 class="page-title"> UI Bootstrap
+    <small>bootstrap components written in pure AngularJS</small>
+</h3>-->
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<!--<div class="note note-success">
+    <h3>UI Bootstrap</h3>
+    <p> Bootstrap components written in pure AngularJS by the AngularUI Team. For more info please check the
+        <a href="http://angular-ui.github.io/bootstrap/">official site</a>
+    </p>
+</div>-->
+<div class="row">
+    <div class="col-md-12">
+
+
+
+
+
+
+        <div id="container" class="chart" style="height: 800px; width:100%"> </div>
+
+
+
+
+
+
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS -->
+<script>
+    // Accordion demo controller
+    function AccordionDemoCtrl($scope)
+    {
+        $scope.oneAtATime = true;
+        $scope.groups = [
+        {
+            title: 'Dynamic Group Header - 1',
+            content: 'Dynamic Group Body - 1'
+        },
+        {
+            title: 'Dynamic Group Header - 2',
+            content: 'Dynamic Group Body - 2'
+        }];
+        $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+        $scope.addItem = function()
+        {
+            var newItemNo = $scope.items.length + 1;
+            $scope.items.push('Item ' + newItemNo);
+        };
+        $scope.status = {
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
+    };
+    // Alert demo controller
+    function AlertDemoCtrl($scope)
+    {
+        $scope.alerts = [
+        {
+            type: 'danger',
+            msg: 'Oh snap! Change a few things up and try submitting again.'
+        },
+        {
+            type: 'success',
+            msg: 'Well done! You successfully read this important alert message.'
+        }];
+        $scope.addAlert = function()
+        {
+            $scope.alerts.push(
+            {
+                msg: 'Another alert!'
+            });
+        };
+        $scope.closeAlert = function(index)
+        {
+            $scope.alerts.splice(index, 1);
+        };
+    };
+    // Buttons demo controller
+    function ButtonsCtrl($scope)
+    {
+        $scope.singleModel = 1;
+        $scope.radioModel = 'Middle';
+        $scope.checkModel = {
+            left: false,
+            middle: true,
+            right: false
+        };
+    };
+    // Tabs demo controller
+    function TabsDemoCtrl($scope)
+    {
+        $scope.tabs = [
+        {
+            title: 'Dynamic Title 1',
+            content: 'Dynamic content 1'
+        },
+        {
+            title: 'Dynamic Title 2',
+            content: 'Dynamic content 2',
+            disabled: true
+        }];
+        /*
+        $scope.alertMe = function() {
+          setTimeout(function() {
+            alert('You\'ve selected the alert tab!');
+          });
+        };
+        */
+    }
+    // Carousel demo controller
+    function CarouselDemoCtrl($scope)
+    {
+        $scope.myInterval = 5000;
+        var slides = $scope.slides = [];
+        $scope.addSlide = function()
+        {
+            var newWidth = 500 + slides.length;
+            slides.push(
+            {
+                image: 'http://placekitten.com/' + newWidth + '/300',
+                text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' + ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+            });
+        };
+        for (var i = 0; i < 4; i++)
+        {
+            $scope.addSlide();
+        }
+    };
+    // Collapse demo controller
+    function CollapseDemoCtrl($scope)
+    {
+        $scope.isCollapsed = false;
+    }
+    // Datepicker demo controller
+    function DatepickerDemoCtrl($scope)
+    {
+        $scope.today = function()
+        {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+        $scope.clear = function()
+        {
+            $scope.dt = null;
+        };
+        // Disable weekend selection
+        $scope.disabled = function(date, mode)
+        {
+            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+        };
+        $scope.toggleMin = function()
+        {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        $scope.toggleMin();
+        $scope.open = function($event)
+        {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.opened = true;
+        };
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+    }
+    // Timepicker demo controller
+    function TimepickerDemoCtrl($scope)
+    {
+        $scope.mytime = new Date();
+        $scope.hstep = 1;
+        $scope.mstep = 15;
+        $scope.options = {
+            hstep: [1, 2, 3],
+            mstep: [1, 5, 10, 15, 25, 30]
+        };
+        $scope.ismeridian = true;
+        $scope.toggleMode = function()
+        {
+            $scope.ismeridian = !$scope.ismeridian;
+        };
+        $scope.update = function()
+        {
+            var d = new Date();
+            d.setHours(14);
+            d.setMinutes(0);
+            $scope.mytime = d;
+        };
+        $scope.changed = function()
+        {
+            console.log('Time changed to: ' + $scope.mytime);
+        };
+        $scope.clear = function()
+        {
+            $scope.mytime = null;
+        };
+    }
+    // Dropdown demo controller
+    function DropdownDemoCtrl($scope)
+    {
+        $scope.items = ['The first choice!', 'And another choice for you.', 'but wait! A third!'];
+        $scope.status = {
+            isopen: false
+        };
+        $scope.toggled = function(open)
+        {
+            console.log('Dropdown is now: ', open);
+        };
+        $scope.toggleDropdown = function($event)
+        {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.status.isopen = !$scope.status.isopen;
+        };
+    }
+    // Modal demo controllers
+    function ModalDemoCtrl($scope, $modal, $log)
+    {
+        $scope.items = ['item1', 'item2', 'item3'];
+        $scope.open = function(size)
+        {
+            var modalInstance = $modal.open(
+            {
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                resolve:
+                {
+                    items: function()
+                    {
+                        return $scope.items;
+                    }
+                }
+            });
+            modalInstance.result.then(function(selectedItem)
+            {
+                $scope.selected = selectedItem;
+            }, function()
+            {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+    }
+
+    function ModalInstanceCtrl($scope, $modalInstance, items)
+    {
+        $scope.items = items;
+        $scope.selected = {
+            item: $scope.items[0]
+        };
+        $scope.ok = function()
+        {
+            $modalInstance.close($scope.selected.item);
+        };
+        $scope.cancel = function()
+        {
+            $modalInstance.dismiss('cancel');
+        };
+    }
+    // Pagination demo controller
+    function PaginationDemoCtrl($scope)
+    {
+        $scope.totalItems = 64;
+        $scope.currentPage = 4;
+        $scope.setPage = function(pageNo)
+        {
+            $scope.currentPage = pageNo;
+        };
+        $scope.pageChanged = function()
+        {
+            console.log('Page changed to: ' + $scope.currentPage);
+        };
+        $scope.maxSize = 5;
+        $scope.bigTotalItems = 175;
+        $scope.bigCurrentPage = 1;
+    }
+    // Popover demo controller
+    function PopoverDemoCtrl($scope)
+    {
+        $scope.dynamicPopover = 'Hello, World!';
+        $scope.dynamicPopoverTitle = 'Title';
+    }
+    // Tooltip demo controller
+    function TooltipDemoCtrl($scope)
+    {
+        $scope.dynamicTooltip = 'Hello, World!';
+        $scope.dynamicTooltipText = 'dynamic';
+        $scope.htmlTooltip = 'I\'ve been made <b>bold</b>!';
+    }
+    // Progressbar demo controller
+    function ProgressDemoCtrl($scope)
+    {
+        $scope.max = 200;
+        $scope.random = function()
+        {
+            var value = Math.floor((Math.random() * 100) + 1);
+            var type;
+            if (value < 25)
+            {
+                type = 'success';
+            }
+            else if (value < 50)
+            {
+                type = 'info';
+            }
+            else if (value < 75)
+            {
+                type = 'warning';
+            }
+            else
+            {
+                type = 'danger';
+            }
+            $scope.showWarning = (type === 'danger' || type === 'warning');
+            $scope.dynamic = value;
+            $scope.type = type;
+        };
+        $scope.random();
+        $scope.randomStacked = function()
+        {
+            $scope.stacked = [];
+            var types = ['success', 'info', 'warning', 'danger'];
+            for (var i = 0, n = Math.floor((Math.random() * 4) + 1); i < n; i++)
+            {
+                var index = Math.floor((Math.random() * 4));
+                $scope.stacked.push(
+                {
+                    value: Math.floor((Math.random() * 30) + 1),
+                    type: types[index]
+                });
+            }
+        };
+        $scope.randomStacked();
+    }
+    // Typeahead demo controller
+    function TypeaheadCtrl($scope)
+    {
+        $scope.selected = undefined;
+        $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+        // Any function returning a promise object can be used to load values asynchronously
+        $scope.getLocation = function(val)
+        {
+            return $http.get('http://maps.googleapis.com/maps/api/geocode/json',
+            {
+                params:
+                {
+                    address: val,
+                    sensor: false
+                }
+            }).then(function(response)
+            {
+                return response.data.results.map(function(item)
+                {
+                    return item.formatted_address;
+                });
+            });
+        };
+        $scope.statesWithFlags = [
+        {
+            'name': 'Alabama',
+            'flag': '5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png'
+        },
+        {
+            'name': 'Alaska',
+            'flag': 'e/e6/Flag_of_Alaska.svg/43px-Flag_of_Alaska.svg.png'
+        },
+        {
+            'name': 'Arizona',
+            'flag': '9/9d/Flag_of_Arizona.svg/45px-Flag_of_Arizona.svg.png'
+        },
+        {
+            'name': 'Arkansas',
+            'flag': '9/9d/Flag_of_Arkansas.svg/45px-Flag_of_Arkansas.svg.png'
+        },
+        {
+            'name': 'California',
+            'flag': '0/01/Flag_of_California.svg/45px-Flag_of_California.svg.png'
+        },
+        {
+            'name': 'Colorado',
+            'flag': '4/46/Flag_of_Colorado.svg/45px-Flag_of_Colorado.svg.png'
+        },
+        {
+            'name': 'Connecticut',
+            'flag': '9/96/Flag_of_Connecticut.svg/39px-Flag_of_Connecticut.svg.png'
+        },
+        {
+            'name': 'Delaware',
+            'flag': 'c/c6/Flag_of_Delaware.svg/45px-Flag_of_Delaware.svg.png'
+        },
+        {
+            'name': 'Florida',
+            'flag': 'f/f7/Flag_of_Florida.svg/45px-Flag_of_Florida.svg.png'
+        },
+        {
+            'name': 'Georgia',
+            'flag': '5/54/Flag_of_Georgia_%28U.S._state%29.svg/46px-Flag_of_Georgia_%28U.S._state%29.svg.png'
+        },
+        {
+            'name': 'Hawaii',
+            'flag': 'e/ef/Flag_of_Hawaii.svg/46px-Flag_of_Hawaii.svg.png'
+        },
+        {
+            'name': 'Idaho',
+            'flag': 'a/a4/Flag_of_Idaho.svg/38px-Flag_of_Idaho.svg.png'
+        },
+        {
+            'name': 'Illinois',
+            'flag': '0/01/Flag_of_Illinois.svg/46px-Flag_of_Illinois.svg.png'
+        },
+        {
+            'name': 'Indiana',
+            'flag': 'a/ac/Flag_of_Indiana.svg/45px-Flag_of_Indiana.svg.png'
+        },
+        {
+            'name': 'Iowa',
+            'flag': 'a/aa/Flag_of_Iowa.svg/44px-Flag_of_Iowa.svg.png'
+        },
+        {
+            'name': 'Kansas',
+            'flag': 'd/da/Flag_of_Kansas.svg/46px-Flag_of_Kansas.svg.png'
+        },
+        {
+            'name': 'Kentucky',
+            'flag': '8/8d/Flag_of_Kentucky.svg/46px-Flag_of_Kentucky.svg.png'
+        },
+        {
+            'name': 'Louisiana',
+            'flag': 'e/e0/Flag_of_Louisiana.svg/46px-Flag_of_Louisiana.svg.png'
+        },
+        {
+            'name': 'Maine',
+            'flag': '3/35/Flag_of_Maine.svg/45px-Flag_of_Maine.svg.png'
+        },
+        {
+            'name': 'Maryland',
+            'flag': 'a/a0/Flag_of_Maryland.svg/45px-Flag_of_Maryland.svg.png'
+        },
+        {
+            'name': 'Massachusetts',
+            'flag': 'f/f2/Flag_of_Massachusetts.svg/46px-Flag_of_Massachusetts.svg.png'
+        },
+        {
+            'name': 'Michigan',
+            'flag': 'b/b5/Flag_of_Michigan.svg/45px-Flag_of_Michigan.svg.png'
+        },
+        {
+            'name': 'Minnesota',
+            'flag': 'b/b9/Flag_of_Minnesota.svg/46px-Flag_of_Minnesota.svg.png'
+        },
+        {
+            'name': 'Mississippi',
+            'flag': '4/42/Flag_of_Mississippi.svg/45px-Flag_of_Mississippi.svg.png'
+        },
+        {
+            'name': 'Missouri',
+            'flag': '5/5a/Flag_of_Missouri.svg/46px-Flag_of_Missouri.svg.png'
+        },
+        {
+            'name': 'Montana',
+            'flag': 'c/cb/Flag_of_Montana.svg/45px-Flag_of_Montana.svg.png'
+        },
+        {
+            'name': 'Nebraska',
+            'flag': '4/4d/Flag_of_Nebraska.svg/46px-Flag_of_Nebraska.svg.png'
+        },
+        {
+            'name': 'Nevada',
+            'flag': 'f/f1/Flag_of_Nevada.svg/45px-Flag_of_Nevada.svg.png'
+        },
+        {
+            'name': 'New Hampshire',
+            'flag': '2/28/Flag_of_New_Hampshire.svg/45px-Flag_of_New_Hampshire.svg.png'
+        },
+        {
+            'name': 'New Jersey',
+            'flag': '9/92/Flag_of_New_Jersey.svg/45px-Flag_of_New_Jersey.svg.png'
+        },
+        {
+            'name': 'New Mexico',
+            'flag': 'c/c3/Flag_of_New_Mexico.svg/45px-Flag_of_New_Mexico.svg.png'
+        },
+        {
+            'name': 'New York',
+            'flag': '1/1a/Flag_of_New_York.svg/46px-Flag_of_New_York.svg.png'
+        },
+        {
+            'name': 'North Carolina',
+            'flag': 'b/bb/Flag_of_North_Carolina.svg/45px-Flag_of_North_Carolina.svg.png'
+        },
+        {
+            'name': 'North Dakota',
+            'flag': 'e/ee/Flag_of_North_Dakota.svg/38px-Flag_of_North_Dakota.svg.png'
+        },
+        {
+            'name': 'Ohio',
+            'flag': '4/4c/Flag_of_Ohio.svg/46px-Flag_of_Ohio.svg.png'
+        },
+        {
+            'name': 'Oklahoma',
+            'flag': '6/6e/Flag_of_Oklahoma.svg/45px-Flag_of_Oklahoma.svg.png'
+        },
+        {
+            'name': 'Oregon',
+            'flag': 'b/b9/Flag_of_Oregon.svg/46px-Flag_of_Oregon.svg.png'
+        },
+        {
+            'name': 'Pennsylvania',
+            'flag': 'f/f7/Flag_of_Pennsylvania.svg/45px-Flag_of_Pennsylvania.svg.png'
+        },
+        {
+            'name': 'Rhode Island',
+            'flag': 'f/f3/Flag_of_Rhode_Island.svg/32px-Flag_of_Rhode_Island.svg.png'
+        },
+        {
+            'name': 'South Carolina',
+            'flag': '6/69/Flag_of_South_Carolina.svg/45px-Flag_of_South_Carolina.svg.png'
+        },
+        {
+            'name': 'South Dakota',
+            'flag': '1/1a/Flag_of_South_Dakota.svg/46px-Flag_of_South_Dakota.svg.png'
+        },
+        {
+            'name': 'Tennessee',
+            'flag': '9/9e/Flag_of_Tennessee.svg/46px-Flag_of_Tennessee.svg.png'
+        },
+        {
+            'name': 'Texas',
+            'flag': 'f/f7/Flag_of_Texas.svg/45px-Flag_of_Texas.svg.png'
+        },
+        {
+            'name': 'Utah',
+            'flag': 'f/f6/Flag_of_Utah.svg/45px-Flag_of_Utah.svg.png'
+        },
+        {
+            'name': 'Vermont',
+            'flag': '4/49/Flag_of_Vermont.svg/46px-Flag_of_Vermont.svg.png'
+        },
+        {
+            'name': 'Virginia',
+            'flag': '4/47/Flag_of_Virginia.svg/44px-Flag_of_Virginia.svg.png'
+        },
+        {
+            'name': 'Washington',
+            'flag': '5/54/Flag_of_Washington.svg/46px-Flag_of_Washington.svg.png'
+        },
+        {
+            'name': 'West Virginia',
+            'flag': '2/22/Flag_of_West_Virginia.svg/46px-Flag_of_West_Virginia.svg.png'
+        },
+        {
+            'name': 'Wisconsin',
+            'flag': '2/22/Flag_of_Wisconsin.svg/45px-Flag_of_Wisconsin.svg.png'
+        },
+        {
+            'name': 'Wyoming',
+            'flag': 'b/bc/Flag_of_Wyoming.svg/43px-Flag_of_Wyoming.svg.png'
+        }];
+    }
+    // Rating demo controller
+    function RatingDemoCtrl($scope)
+    {
+        $scope.rate = 7;
+        $scope.max = 10;
+        $scope.isReadonly = false;
+        $scope.hoveringOver = function(value)
+        {
+            $scope.overStar = value;
+            $scope.percent = 100 * (value / $scope.max);
+        };
+        $scope.ratingStates = [
+        {
+            stateOn: 'glyphicon-ok-sign',
+            stateOff: 'glyphicon-ok-circle'
+        },
+        {
+            stateOn: 'glyphicon-star',
+            stateOff: 'glyphicon-star-empty'
+        },
+        {
+            stateOn: 'glyphicon-heart',
+            stateOff: 'glyphicon-ban-circle'
+        },
+        {
+            stateOn: 'glyphicon-heart'
+        },
+        {
+            stateOff: 'glyphicon-off'
+        }];
+    }
+</script>
+<!-- END MAIN JS -->
+
+<script type="text/javascript">
+    var map = new BMap.Map("container");          // 创建地图实例
+
+    var point = new BMap.Point(118.8974, 37.661984);
+    map.centerAndZoom(point, 14);             // 初始化地图，设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(); // 允许滚轮缩放
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl());
+    map.addControl(new BMap.OverviewMapControl());
+    map.addControl(new BMap.MapTypeControl());
+    var points = [
+        { "lng": 118.8974, "lat":  37.661984, "count": 100 },
+
+        { "lng": 118.898455, "lat": 37.660921, "count": 40 },
+
+        { "lng": 118.893289, "lat": 37.669989, "count": 18 },
+
+        { "lng": 118.899239, "lat": 37.666759, "count": 39 },
+
+        { "lng": 118.897784, "lat": 37.665754, "count": 47 },
+        { "lng": 118.890193, "lat": 37.667061, "count": 52 },
+
+        { "lng": 118.896292, "lat": 37.661166, "count": 9 },
+
+        { "lng": 118.893765, "lat": 37.669376, "count": 3 },
+
+        { "lng": 118.898568, "lat": 37.668161, "count": 23 },
+
+        { "lng": 118.8974, "lat": 37.668616, "count": 6 },
+
+        { "lng": 118.897836, "lat": 37.666998, "count": 99 },
+
+        { "lng": 118.896092, "lat": 37.662995, "count": 16 },
+
+        { "lng": 118.895551, "lat": 37.663373, "count": 17 },
+
+        { "lng": 118.898237, "lat": 37.626337, "count": 54 },
+
+        { "lng": 118.895377, "lat": 37.664137, "count": 19 },
+
+        { "lng": 118.896883, "lat": 37.667171, "count": 3 },
+
+        { "lng": 118.895712, "lat": 37.665613, "count": 14 },
+
+    ]
+
+
+
+
+    function show() {
+        return 49;
+    }
+
+    if (!isSupportCanvas()) {
+        alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+    }
+    //详细的参数,可以查看heatmap.js的文档 https://github.com/pa7/heatmap.js/blob/master/README.md
+    //参数说明如下:
+    /* visible 热力图是否显示,默认为true
+     * opacity 热力的透明度,1-100
+     * radius 势力图的每个点的半径大小
+     * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
+     *	{
+     .2:'rgb(0, 255, 255)',
+     .5:'rgb(0, 110, 255)',
+     .8:'rgb(100, 0, 255)'
+     }
+     其中 key 表示插值的位置, 0~1.
+     value 为颜色值.
+     */
+    heatmapOverlay = new BMapLib.HeatmapOverlay({ "radius": 20 });
+    map.addOverlay(heatmapOverlay);
+    heatmapOverlay.setDataSet({ data: points, max: 100 });
+    //是否显示热力图
+    function openHeatmap() {
+        heatmapOverlay.show();
+    }
+    function closeHeatmap() {
+        heatmapOverlay.hide();
+    }
+    //closeHeatmap();
+    function setGradient() {
+        /*格式如下所示:
+         {
+         0:'rgb(102, 255, 0)',
+         .5:'rgb(255, 170, 0)',
+         1:'rgb(255, 0, 0)'
+         }*/
+        var gradient = {};
+        var colors = document.querySelectorAll("input[type='color']");
+        colors = [].slice.call(colors, 0);
+        colors.forEach(function (ele) {
+            gradient[ele.getAttribute("data-key")] = ele.value;
+        });
+        heatmapOverlay.setOptions({ "gradient": gradient });
+    }
+    //判断浏览区是否支持canvas
+    function isSupportCanvas() {
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+
+
+    //点击某一点显示温度湿度等信息\
+    map.addEventListener("mousemove", function (e) {
+
+        var lngg = e.point.lng;
+        var latt = e.point.lat;
+
+        function show(lng, lat) {
+            for (var i = 0; i < 90; i++) {
+                if (points[i].lng == lng && points[i].lat==lat) {
+                    return points[i].count;
+                }
+            }
+        }
+
+
+    });
+
+    var marks = new Array();
+    var infoWindow = new Array();
+    for (var i = 0; i < points.length; i++) {
+        marks[i] = new BMap.Marker(new BMap.Point(points[i].lng, points[i].lat));
+    }
+
+
+    map.addEventListener("zoomend", function () {
+
+        if( map.getZoom() > 14){
+            for (var i = 0; i < marks.length; i++) {
+                map.addOverlay(marks[i]);
+            }
+
+            for (var i = 0; i < marks.length; i++) {
+                infoWindow[i] = new BMap.InfoWindow("温度：" + points[i].count);
+            }
+            marks[1].addEventListener("click", function () { this.openInfoWindow(infoWindow[1]); });
+            marks[2].addEventListener("click", function () { this.openInfoWindow(infoWindow[2]); });
+            marks[3].addEventListener("click", function () { this.openInfoWindow(infoWindow[3]); });
+            marks[4].addEventListener("click", function () { this.openInfoWindow(infoWindow[4]); });
+            marks[5].addEventListener("click", function () { this.openInfoWindow(infoWindow[5]); });
+            marks[6].addEventListener("click", function () { this.openInfoWindow(infoWindow[6]); });
+            marks[7].addEventListener("click", function () { this.openInfoWindow(infoWindow[7]); });
+            marks[8].addEventListener("click", function () { this.openInfoWindow(infoWindow[8]); });
+            marks[9].addEventListener("click", function () { this.openInfoWindow(infoWindow[9]); });
+            marks[10].addEventListener("click", function () { this.openInfoWindow(infoWindow[10]); });
+            marks[11].addEventListener("click", function () { this.openInfoWindow(infoWindow[11]); });
+            marks[12].addEventListener("click", function () { this.openInfoWindow(infoWindow[12]); });
+            marks[13].addEventListener("click", function () { this.openInfoWindow(infoWindow[13]); });
+        }
+        if(map.getZoom() < 15){
+            for (var i = 0; i < marks.length; i++) {
+                map.removeOverlay(marks[i]);
+            }
+        }
+
+    });
+
+
+
+
+
+</script>
+

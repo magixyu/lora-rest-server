@@ -1,0 +1,179 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">主页</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">系统状态</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="portlet light bordered form-fit" style="margin-top: 10px" >
+    <div class="portlet-title" style="height:80px">
+        <div class="caption">
+            <i class="fa fa-cogs font-green-sharp"></i>
+            <span class="caption-subject font-green-sharp bold uppercase">系统状态</span>
+
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse"> </a>
+            <a href="#" data-toggle="modal" class="config"> </a>
+            <a href="javascript:;" class="reload"> </a>
+            <a href="javascript:;" class="remove"> </a>
+        </div>
+    </div>
+    <div class="portlet-body form" style="height:620px">
+        <div ng-controller="DashboardController">
+            <div class="note note-info">
+                <h4>本系统已正常运行125天
+                    <span class="close" data-close="note"></span>
+                </h4>
+
+            </div>
+            <div class="note note-info">
+                <h4>总终端数量2000个，最近1小时活动终端数量2000个
+                    <span class="close" data-close="note"></span>
+                </h4>
+
+            </div>
+            <div class="note note-info">
+                <h4>最近12小时报警数量0次
+                    <span class="close" data-close="note"></span>
+                </h4>
+
+            </div>
+            <!-- BEGIN DASHBOARD STATS -->
+            <!-- <div class="row">
+                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="dashboard-stat blue">
+                         <div class="visual">
+                             <i class="fa fa-comments"></i>
+                         </div>
+                         <div class="details">
+                             <div class="number"> 1349 </div>
+                             <div class="desc"> New Feedbacks </div>
+                         </div>
+                         <a class="more" href="#"> View more
+                             <i class="m-icon-swapright m-icon-white"></i>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="dashboard-stat red">
+                         <div class="visual">
+                             <i class="fa fa-bar-chart-o"></i>
+                         </div>
+                         <div class="details">
+                             <div class="number"> 12,5M$ </div>
+                             <div class="desc"> Total Profit </div>
+                         </div>
+                         <a class="more" href="#"> View more
+                             <i class="m-icon-swapright m-icon-white"></i>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="dashboard-stat green">
+                         <div class="visual">
+                             <i class="fa fa-shopping-cart"></i>
+                         </div>
+                         <div class="details">
+                             <div class="number"> 549 </div>
+                             <div class="desc"> New Orders </div>
+                         </div>
+                         <a class="more" href="#"> View more
+                             <i class="m-icon-swapright m-icon-white"></i>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                     <div class="dashboard-stat purple">
+                         <div class="visual">
+                             <i class="fa fa-globe"></i>
+                         </div>
+                         <div class="details">
+                             <div class="number"> +89% </div>
+                             <div class="desc"> Brand Popularity </div>
+                         </div>
+                         <a class="more" href="#"> View more
+                             <i class="m-icon-swapright m-icon-white"></i>
+                         </a>
+                     </div>
+                 </div>
+             </div>-->
+            <!-- END DASHBOARD STATS -->
+            <!--  <div class="row">
+                  <div class="col-md-6 col-sm-12">
+
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6 col-sm-12">
+
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6 col-sm-6">
+
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+
+                  </div>
+              </div>-->
+        </div>
+    </div>
+</div>
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+<script>
+    Dashboard.init();
+</script>
+<!-- BEGIN MAIN JS & CSS -->

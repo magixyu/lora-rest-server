@@ -1,0 +1,236 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/ng_ui_bootstrap.html">首页</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#/ng_ui_bootstrap.html">态势图</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<!--<div class="note note-success">
+    <h3>UI Bootstrap</h3>
+    <p> Bootstrap components written in pure AngularJS by the AngularUI Team. For more info please check the
+        <a href="http://angular-ui.github.io/bootstrap/">official site</a>
+    </p>
+</div>-->
+<div class="row" style="margin-top: 10px">
+    <div style="height:710px;width:20%;float:left;">
+        <div class="col-md-3"  style="width:100%;height:100%">
+            <div class="portlet light bordered"  style="width:100%;height:100%">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-cogs font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp bold uppercase">传感器终端</span>
+                    </div>
+                    <!-- <div class="tools">
+                         <a href="javascript:;" class="collapse"> </a>
+                         <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                         <a href="javascript:;" class="reload"> </a>
+                         <a href="javascript:;" class="remove"> </a>
+                     </div>-->
+                </div>
+                <div class="portlet-body">
+                    <div id="tree_1" class="tree-demo">
+                        <ul>
+                            <li> 西片区
+                                <ul>
+                                    <li data-jstree='{ "selected" : true }'>
+                                        <a href="javascript:;"> 传感器001</a>
+                                </li>
+                                    <li data-jstree='{ "icon" : "fa fa-briefcase icon-state-success " }'> custom icon URL </li>
+                                    <li data-jstree='{ "opened" : true }'> 传感器002
+                                        <ul>
+                                        <li data-jstree='{ "disabled" : true }'> 东片区</li>
+                                            <li data-jstree='{ "type" : "file" }'>传感器003 </li>
+                                        </ul>
+                                    </li>
+                                    <li data-jstree='{ "icon" : "fa fa-warning icon-state-danger" }'> Custom icon </li>
+                                </ul>
+                            </li>
+                            <li data-jstree='{ "type" : "file" }'>
+                                <a href="http://www.jstree.com"> 东区 </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-6">
+             <div class="portlet light bordered">
+                 <div class="portlet-title">
+                     <div class="caption">
+                         <i class="fa fa-cogs font-green-sharp"></i>
+                         <span class="caption-subject font-green-sharp bold uppercase">Checkable Tree</span>
+                     </div>
+                     <div class="tools">
+                         <a href="javascript:;" class="collapse"> </a>
+                         <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                         <a href="javascript:;" class="reload"> </a>
+                         <a href="javascript:;" class="remove"> </a>
+                     </div>
+                 </div>
+                 <div class="portlet-body">
+                     <div id="tree_2" class="tree-demo"> </div>
+                 </div>
+             </div>
+         </div>-->
+    </div>
+    <div style="height:710px;width:80%;float:left;margin:0,0,0;padding-right:0,0,0">
+        <div class="portlet light bordered"  style="width:100%;height:100%">
+            <div class="col-md-12">
+                    <div class="portlet light ">
+                        <div class="portlet-body">
+                            <div id="echart1" class="chart" style="height: 300px; width:auto"> </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-12">
+                    <div class="portlet light ">
+                        <div class="portlet-body">
+                            <div id="echart1_1" class="chart" style="height: 300px; width:auto" > </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS -->
+
+<!-- END MAIN JS -->
+
+
+<!--仪表盘脚本开始-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('echart1'));
+
+    option = {
+        tooltip: {
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '业务指标',
+                type: 'gauge',
+                detail: { formatter: '{value}℃' },
+                data: [{ value: 82, name: '温度' }]
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+
+
+
+
+</script>
+
+<!--仪表盘脚本结束-->
+<!--折线图脚本开始-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('echart1_1'));
+
+    option = {
+        title: {
+            text: '折线图堆叠'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['红外线']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['0', '500', '1000', '1500', '2000', '2500', '3000', '3500']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '红外线',
+                type: 'line',
+                stack: '总量',
+                data: [0.8, 0.7, 0.5, 0.6, 0.75, 0.65, 0.9, 0.95]
+            },
+
+
+
+        ]
+    };
+
+    myChart.setOption(option);
+
+
+
+
+</script>
+
+<!--折线图脚本结束-->
+<script>
+    UITree.init(); // init todo page
+</script>

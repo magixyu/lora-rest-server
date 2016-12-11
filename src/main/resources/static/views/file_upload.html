@@ -1,0 +1,237 @@
+﻿<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">主页</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#/file_upload.html">历史数据</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<h3 class="page-title"> 历史数据
+    <small>angularjs file upload</small>
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="note note-success">
+    
+    <p> Angular File Upload is a module for the AngularJS framework. Supports drag-n-drop upload, upload progress, validation filters and a file upload queue. It supports native HTML5 uploads, but degrades to a legacy iframe upload method for older browsers.
+        Works with any server side platform which supports standard HTML form uploads. </p>
+    <p> For more info please check the
+        <a href="https://github.com/nervgh/angular-file-upload">official github page</a>
+    </p>
+</div>
+<div class="row" ng-controller="FileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+
+    
+</div>
+<div class="row" ng-controller="FileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+    <div class="col-md-4" >
+        <!-- BEGIN: ACCORDION DEMO -->
+                                     
+                                            
+                                     
+                                         <div class="portlet light ">
+                                            <div class="portlet-body">
+                                            <div id="echart1_1" class="chart" style="height: 300px; width:700px" > </div>
+                                            </div>
+                                         </div>
+                                      
+        <!-- END: ACCORDION DEMO -->
+    </div>
+    
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS-->
+<script>
+    function FileUploadCtrl($scope, FileUploader)
+    {
+        var uploader = $scope.uploader = new FileUploader(
+        {
+            url: 'assets/global/plugins/angularjs/plugins/angular-file-upload/upload.php'
+        });
+        // FILTERS
+        uploader.filters.push(
+        {
+            name: 'customFilter',
+            fn: function(item /*{File|FileLikeObject}*/ , options)
+            {
+                return this.queue.length < 10;
+            }
+        });
+        // CALLBACKS
+        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options)
+        {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function(fileItem)
+        {
+            console.info('onAfterAddingFile', fileItem);
+        };
+        uploader.onAfterAddingAll = function(addedFileItems)
+        {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function(item)
+        {
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onProgressItem = function(fileItem, progress)
+        {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        uploader.onProgressAll = function(progress)
+        {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers)
+        {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers)
+        {
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+        uploader.onCancelItem = function(fileItem, response, status, headers)
+        {
+            console.info('onCancelItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteItem = function(fileItem, response, status, headers)
+        {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteAll = function()
+        {
+            console.info('onCompleteAll');
+        };
+        console.info('uploader', uploader);
+    };
+</script>
+<!-- BEGIN MAIN JS -->
+
+<!--仪表盘脚本开始-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('echart1'));
+
+    option = {
+        tooltip: {
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '业务指标',
+                type: 'gauge',
+                detail: { formatter: '{value}℃' },
+                data: [{ value: 82, name: '温度' }]
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+
+
+
+
+</script>
+
+<!--仪表盘脚本结束-->
+<!--折线图脚本开始-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('echart1_1'));
+
+    option = {
+        title: {
+            text: '折线图堆叠'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['温度']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['0', '500', '1000', '1500', '2000', '2500', '3000', '3500']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '温度',
+                type: 'line',
+                stack: '总量',
+                data: [0.8, 0.7, 0.5, 0.6, 0.75, 0.65, 0.9, 0.95]
+            },
+
+
+
+        ]
+    };
+
+    myChart.setOption(option);
+
+
+
+
+</script>
+
+<!--折线图脚本结束-->

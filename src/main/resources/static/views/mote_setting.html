@@ -1,0 +1,182 @@
+﻿<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">主页</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#/ui_select.html">系统设置</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<h3 class="page-title"> 设置
+    <small>AngularJS-native version of Select2</small>
+</h3>-->
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<!--<div class="note note-success">
+    <h3>UI Select</h3>
+    <p> AngularJS-native version of Select2 </p>
+    <p> For more info please check the
+        <a href="https://github.com/angular-ui/ui-select">official github page</a>
+    </p>
+</div>-->
+<div class="row" style="margin-top: 10px;">
+    <div style="height:710px;width:20%;float:left;">
+        <div class="col-md-3"  style="width:100%;height:100%">
+            <div class="portlet light bordered"  style="width:100%;height:100%">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-cogs font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp bold uppercase">传感器终端</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div id="tree_1" class="tree-demo">
+                        <ul>
+                            <li> 西片区
+                                <ul>
+                                    <li data-jstree='{ "selected" : true }'>
+                                        <a href="javascript:;"> 传感器001</a>
+                                    </li>
+                                    <li data-jstree='{ "icon" : "fa fa-briefcase icon-state-success " }'> custom icon URL </li>
+                                    <li data-jstree='{ "opened" : true }'> 传感器002
+                                        <ul>
+                                            <li data-jstree='{ "disabled" : true }'> 东片区</li>
+                                            <li data-jstree='{ "type" : "file" }'>传感器003 </li>
+                                        </ul>
+                                    </li>
+                                    <li data-jstree='{ "icon" : "fa fa-warning icon-state-danger" }'> Custom icon </li>
+                                </ul>
+                            </li>
+                            <li data-jstree='{ "type" : "file" }'>
+                                <a href="http://www.jstree.com"> 东区 </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="height:710px;width:80%;float:left;">
+        <div class="portlet light bordered"  style="width:100%;height:100%">
+            <div class="portlet-title" style="height:80px">
+                <div class="caption">
+                    <i class="fa fa-cogs font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp bold uppercase">系统设置</span>
+
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="#" data-toggle="modal" class="config"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form" style="height:620px">
+                <!-- BEGIN FORM-->
+                <form action="#" class="form-horizontal form-bordered form-row-stripped">
+                    <div class="form-body">
+                        <div class="portlet" style="width: 100%;float: left;">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">SF</label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="请填写SF值" class="form-control" />
+                                    <span class="help-block">SF值</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">CONFIRM</label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="请填写CONFIRM值" class="form-control" />
+                                    <span class="help-block">CONFIRM值</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">ADR</label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="请填写ADR值" class="form-control" />
+                                    <span class="help-block">ADR值</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">频率</label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="请填写频率值" class="form-control" />
+                                    <span class="help-block">频率值</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">PORT</label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="请填写PORT值" class="form-control" />
+                                    <span class="help-block">PORT值</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">RF功率</label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="请填写RF功率值" class="form-control" />
+                                    <span class="help-block">RF值</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div  style="width: 100%;text-align: center">
+                        <button type="submit" class="btn green">
+                            <i class="fa fa-check"></i> 保存</button>
+                        <button type="button" class="btn default">取消</button>
+                    </div>
+
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS-->
+<script>
+</script>
+<!-- BEGIN MAIN JS -->
