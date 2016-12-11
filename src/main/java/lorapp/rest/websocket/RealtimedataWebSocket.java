@@ -5,6 +5,7 @@ import lorapp.rest.handler.MsgHandler;
 import lorapp.rest.service.RealtimedataMQSubscribeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -18,6 +19,9 @@ import java.util.Map;
 public class RealtimedataWebSocket implements MsgHandler{
     private static final Logger LOGGER = LoggerFactory.getLogger(RealtimedataWebSocket.class);
 
+    @Autowired
+    RealtimedataMQSubscribeService realtimedataMQSubscribeService; 
+    
     private Session session;
     private static final String APP_EUI_PARAM = "appEui";
     private static final String DEV_EUI_PARAM = "devEui";
@@ -43,12 +47,12 @@ public class RealtimedataWebSocket implements MsgHandler{
         this.appEuiTag = paramVal4AppEui;
         this.devEuiTag = paramVal4DevEui;
 
-        RealtimedataMQSubscribeService.registerMsgHandler(this);
+        realtimedataMQSubscribeService.registerMsgHandler(this);
     }
 
     @OnClose
     public void onClose(){
-        RealtimedataMQSubscribeService.unregisterMsgHandler(this);
+        realtimedataMQSubscribeService.unregisterMsgHandler(this);
     }
 
     @OnMessage
