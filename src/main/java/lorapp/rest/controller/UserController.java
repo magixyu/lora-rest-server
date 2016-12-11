@@ -2,11 +2,17 @@ package lorapp.rest.controller;
 
 import lorapp.db.entity.User;
 import lorapp.db.repo.UserRepo;
+import lorapp.rest.util.CommonResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Iterator;
-import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+
+import static org.apache.http.client.methods.RequestBuilder.put;
 
 /**
  * @Author MoseC
@@ -17,6 +23,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     UserRepo userRepo;
 
@@ -31,23 +39,57 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void addUser(@RequestBody User user){
-        userRepo.save(user);
+    public CommonResult addUser(@RequestBody User user){
+        CommonResult commRes = new CommonResult();
+
+        try {
+            String passwd = getMD5Code(user.getPasswd());
+            user.setPasswd(passwd);
+            userRepo.save(user);
+            commRes.setSuccess(true);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            commRes.setErrorMsg(e.getMessage());
+        }
+        return commRes;
     }
 
     @RequestMapping(value = "/{userName}", method = RequestMethod.DELETE)
-    public void deleteUser(@PathVariable("userName") String userName){
+    public CommonResult deleteUser(@PathVariable("userName") String userName){
+        CommonResult commRes = new CommonResult();
         userRepo.delete(userRepo.findByUserName(userName));
+        commRes.setSuccess(true);
+        return commRes;
     }
 
     @RequestMapping(value = "/{userName}", method = RequestMethod.POST)
-    public void updateUser(@RequestBody User user){
-        User targetUser = userRepo.findByUserName(user.getUserName());
-        if(targetUser != null){
-            user.setId(targetUser.getId());
-            userRepo.save(user);
-        }
+    public CommonResult updateUser(@RequestBody final User user){
+        CommonResult commRes = new CommonResult();
 
+        try {
+            User targetUser = userRepo.findByUserName(user.getUserName());
+            if (targetUser != null) {
+                user.setPasswd(getMD5Code(user.getPasswd()));
+                user.setId(targetUser.getId());
+                userRepo.save(user);
+
+                commRes.setSuccess(true);
+                commRes.setResponseData(new HashMap<String, Object>() {{put("updatedUser", user);}});
+            }else{
+                commRes.setErrorMsg("不存在此用户");
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            commRes.setErrorMsg(e.getMessage());
+        }
+        return commRes;
+    }
+
+
+    private String getMD5Code(String passwd) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] passwdInMD5 = md.digest(passwd.getBytes());
+        return String.valueOf(passwdInMD5);
     }
 
 }
