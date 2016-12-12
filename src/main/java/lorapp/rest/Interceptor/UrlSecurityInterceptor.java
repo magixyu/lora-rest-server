@@ -16,29 +16,21 @@ import java.util.List;
  */
 public class UrlSecurityInterceptor implements HandlerInterceptor {
 
-    public static List<String> adminUserUrls = new ArrayList<String>();
-
-    static{
-        adminUserUrls.add("//TODO 用户新增页面");
-        adminUserUrls.add("//TODO 用户删除页面");
-        adminUserUrls.add("//TODO 用户编辑页面");
-        adminUserUrls.add("//TODO 用户查询页面");
-    }
-
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
         if(user == null){
+            response.sendRedirect(InterceptorConfig.LOGIN_URL);
             return false;
         }else{
             String userRole = user.getRole();
             if(!User.USER_ADMIN.equals(userRole)){
-                String requestUrl = request.getRequestURI();
-                for(String adminUserUrl : adminUserUrls){
-                    if(adminUserUrl.endsWith(requestUrl)){
-                        return false;
-                    }
+                String requestUrl = request.getRequestURI().replace(request.getContextPath(), "");
+                if(requestUrl.startsWith(InterceptorConfig.ADMIN_DIR)){
+                    //ordin user can not access admin related pages
+                    response.sendRedirect(InterceptorConfig.LOGIN_URL);
+                    return false;
                 }
             }
             return true;

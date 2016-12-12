@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
@@ -20,24 +21,23 @@ import java.util.HashMap;
  * make the input data validation logic embedded into controller method, but not use the hibernate validator
  */
 @RestController
-@RequestMapping(value = "/user")
 public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserRepo userRepo;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/user/all", method = RequestMethod.GET)
     public Iterable<User> getAllUser(){
         return userRepo.findAll();
     }
 
-    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/user/{userName}", method = RequestMethod.GET)
     public User getUser(@PathVariable("userName") String userName){
         return userRepo.findByUserName(userName);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/user", method = RequestMethod.PUT)
     public CommonResult addUser(@RequestBody User user){
         CommonResult commRes = new CommonResult();
 
@@ -69,7 +69,7 @@ public class UserController {
         return commRes;
     }
 
-    @RequestMapping(value = "/{userName}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/user/{userName}", method = RequestMethod.DELETE)
     public CommonResult deleteUser(@PathVariable("userName") String userName){
         CommonResult commRes = new CommonResult();
         userRepo.delete(userRepo.findByUserName(userName));
@@ -82,7 +82,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/{userName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/{userName}", method = RequestMethod.POST)
     public CommonResult updateUser(@RequestBody final User user){
         CommonResult commRes = new CommonResult();
 
@@ -111,7 +111,7 @@ public class UserController {
         return commRes;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public CommonResult login(@RequestBody User user, HttpServletRequest request){
         CommonResult commRes = new CommonResult();
 
@@ -145,10 +145,20 @@ public class UserController {
     }
 
 
-    private String getMD5Code(String passwd) throws NoSuchAlgorithmException {
+    private static String getMD5Code(String passwd) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] passwdInMD5 = md.digest(passwd.getBytes());
-        return String.valueOf(passwdInMD5);
+        BASE64Encoder base64en = new BASE64Encoder();
+
+        String passwdInMD5 = base64en.encode(md.digest(passwd.getBytes()));
+        return passwdInMD5;
+    }
+
+    public static void main(String[] args){
+        try {
+            System.out.println(UserController.getMD5Code("123456"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
 
