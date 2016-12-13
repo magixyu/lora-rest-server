@@ -6,9 +6,8 @@ import lorapp.rest.util.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
-import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
@@ -147,10 +146,7 @@ public class UserController {
 
     private static String getMD5Code(String passwd) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
-        BASE64Encoder base64en = new BASE64Encoder();
-
-        String passwdInMD5 = base64en.encode(md.digest(passwd.getBytes()));
-        return passwdInMD5;
+        return String.valueOf(Base64Utils.encode(md.digest(passwd.getBytes())));
     }
 
     public static void main(String[] args){
