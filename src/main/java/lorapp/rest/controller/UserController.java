@@ -27,13 +27,16 @@ public class UserController {
     UserRepo userRepo;
 
     @RequestMapping(value = "/admin/user/all", method = RequestMethod.GET)
-    public Iterable<User> getAllUser(){
-        return userRepo.findAll();
+    public CommonResult getAllUsers(){
+        CommonResult commRes = new CommonResult();
+        Iterable<User> userList = userRepo.findAll();
+        return commRes.setSuccess(true).setResponseData(userList);
     }
 
     @RequestMapping(value = "/admin/user/{userName}", method = RequestMethod.GET)
-    public User getUser(@PathVariable("userName") String userName){
-        return userRepo.findByUserName(userName);
+    public CommonResult getUser(@PathVariable("userName") String userName){
+        CommonResult commRes = new CommonResult();
+        return commRes.setSuccess(true).setResponseData(userRepo.findByUserName(userName));
     }
 
     @RequestMapping(value = "/admin/user", method = RequestMethod.PUT)

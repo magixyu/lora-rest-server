@@ -10,7 +10,7 @@ import java.util.Map;
 public class CommonResult {
     private boolean isSuccess;
     private String errorMsg;
-    private Map<String, Object> responseData;
+    private Object responseData;
 
 
     public boolean isSuccess() {
@@ -31,11 +31,11 @@ public class CommonResult {
         return this;
     }
 
-    public Map<String, Object> getResponseData() {
+    public Object getResponseData() {
         return responseData;
     }
 
-    public CommonResult setResponseData(Map<String, Object> responseData) {
+    public CommonResult setResponseData(Object responseData) {
         this.responseData = responseData;
         return this;
     }
