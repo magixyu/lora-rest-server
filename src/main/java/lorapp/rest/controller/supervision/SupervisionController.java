@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lorapp.db.supervision.enity.SimpleSupervision;
 import lorapp.db.supervision.repo.SimpleSupervisionRepo;
 import lorapp.rest.service.JacksonService;
+import lorapp.rest.service.mq.MQConfig;
+import lorapp.rest.service.mq.SpvMQSubscribeService;
 import lorapp.rest.util.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,8 @@ public class SupervisionController {
     SimpleSupervisionRepo simpleSupervisionRepo;
     @Autowired
     JacksonService jacksonService;
+    @Autowired
+    SpvMQSubscribeService spvMQSubscribeService;
 
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -52,6 +56,7 @@ public class SupervisionController {
             return commRes;
         }
         simpleSupervisionRepo.save(simpleSupervision);
+        spvMQSubscribeService.newSubsription4SimpleSpv(simpleSupervision);
         commRes.setSuccess(true);
         return commRes;
     }
@@ -76,6 +81,7 @@ public class SupervisionController {
             return commRes;
         }
         simpleSupervisionRepo.save(simpleSupervision);
+        spvMQSubscribeService.updateSubsription4SimpleSpv(simpleSupervision);
         commRes.setSuccess(true);
         return commRes;
     }
@@ -92,7 +98,9 @@ public class SupervisionController {
             commRes.setErrorMsg("要删除的监控项id必须为整数，id：" + simpleSpvIdStr);
             return commRes;
         }
+        SimpleSupervision simpleSupervision = simpleSupervisionRepo.findOne(simpleSpvId);
         simpleSupervisionRepo.delete(simpleSpvId);
+        spvMQSubscribeService.delSubscription4SimpleSPV(simpleSupervision);
         commRes.setSuccess(true);
         return commRes;
     }

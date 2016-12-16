@@ -1,7 +1,8 @@
-package lorapp.rest.service;
+package lorapp.rest.service.mq;
 
 import lorapp.db.entity.UploadMessage;
 import lorapp.rest.handler.MsgHandler;
+import lorapp.rest.service.JacksonService;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -22,7 +23,7 @@ public class RealtimedataMQSubscribeService {
     @Value("${lora.rawdata.exchange}")
     private String exch;
 
-    private CopyOnWriteArraySet<MsgHandler> msgHandlerSet = new CopyOnWriteArraySet<MsgHandler>();
+    private static CopyOnWriteArraySet<MsgHandler> msgHandlerSet = new CopyOnWriteArraySet<MsgHandler>();
 
     @Autowired(required = true)
     JacksonService jacksonService;
@@ -50,11 +51,11 @@ public class RealtimedataMQSubscribeService {
         }
     }
 
-    public void registerMsgHandler(MsgHandler msgHandler){
+    public static void registerMsgHandler(MsgHandler msgHandler){
         msgHandlerSet.add(msgHandler);
     }
 
-    public void unregisterMsgHandler(MsgHandler msgHandler){
+    public static void unregisterMsgHandler(MsgHandler msgHandler){
         msgHandlerSet.remove(msgHandler);
     }
 }
