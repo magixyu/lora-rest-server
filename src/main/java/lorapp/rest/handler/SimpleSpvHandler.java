@@ -6,13 +6,16 @@ import lorapp.db.supervision.enity.Alarm;
 import lorapp.db.supervision.enity.SimpleSupervision;
 import lorapp.db.supervision.repo.AlarmRepo;
 import lorapp.rest.service.JacksonService;
+import lorapp.rest.util.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.swing.*;
 import java.util.Map;
 
 /**
@@ -22,13 +25,13 @@ import java.util.Map;
  */
 public class SimpleSpvHandler implements MessageListener {
     private Logger LOGGER = LoggerFactory.getLogger(SimpleSpvHandler.class);
-    @Autowired
-    JacksonService jacksonService;
-    @Autowired
-    AlarmRepo alarmRepo;
+
+    private JacksonService jacksonService = (JacksonService) SpringContextUtil.getBean("jacksonService");
+    private AlarmRepo alarmRepo = (AlarmRepo) SpringContextUtil.getBean("alarmRepo");
+    private Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
 
     private SimpleSupervision simpleSpv;
-    private SimpleMessageConverter msgConvert = new SimpleMessageConverter();
+
 
     public SimpleSpvHandler(){}
     public SimpleSpvHandler(SimpleSupervision simpleSpv){
@@ -43,12 +46,12 @@ public class SimpleSpvHandler implements MessageListener {
         String compartor = this.simpleSpv.getComparator();
 
         try {
-            UploadMessage uploadMessage = (UploadMessage) msgConvert.fromMessage(message);
+            UploadMessage uploadMessage = (UploadMessage) jackson2JsonMessageConverter.fromMessage(message);
             Map msgAsMap = jacksonService.toObject(jacksonService.toJsonString(uploadMessage), Map.class);
             float metricVal = (float) msgAsMap.get(metricName);
 
             if(alarmShouldBeTriggered(metricVal, metricThreshold, compartor)){
-                Alarm alarm = new Alarm(this.simpleSpv.getAppEUI(), this.simpleSpv.getDevEUI(),
+                Alarm alarm = new Alarm(this.simpleSpv.getAppEui(), this.simpleSpv.getDevEui(),
                         new StringBuilder("Actual value:").append(metricVal)
                                 .append(" ").append(compartor).append(" threshold:")
                                 .append(metricThreshold).toString());

@@ -10,6 +10,7 @@ import lorapp.rest.util.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class SupervisionController {
         CommonResult commRes = new CommonResult();
 
         String errorMsg = validateBean(simpleSupervision);
-        if(errorMsg == null){
+        if(errorMsg != null){
             commRes.setErrorMsg(errorMsg);
             return commRes;
         }
@@ -100,14 +101,14 @@ public class SupervisionController {
         }
         SimpleSupervision simpleSupervision = simpleSupervisionRepo.findOne(simpleSpvId);
         simpleSupervisionRepo.delete(simpleSpvId);
-        spvMQSubscribeService.delSubscription4SimpleSPV(simpleSupervision);
+        spvMQSubscribeService.delSubscription4SimpleSpv(simpleSupervision);
         commRes.setSuccess(true);
         return commRes;
     }
 
 
     private String validateBean(SimpleSupervision simpleSupervision){
-        String appEUI = simpleSupervision.getAppEUI();
+        String appEUI = simpleSupervision.getAppEui();
         String spvdMetric = simpleSupervision.getSpvdMetric();
         String comparator = simpleSupervision.getComparator();
         if(appEUI == null || "".equals(appEUI)
