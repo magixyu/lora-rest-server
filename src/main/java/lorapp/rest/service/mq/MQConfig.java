@@ -49,11 +49,6 @@ public class MQConfig {
 	@Autowired
 	ConnectionFactory connectionFactory;
 
-	/*
-	 * private ConnectionFactory connectionFactory; private RabbitAdmin
-	 * rabbitAdmin;
-	 */
-
 	private Map<String, TopicExchange> topicExchangeMap = new ConcurrentHashMap<>();
 	private Map<String, Queue> queueMap = new ConcurrentHashMap<>();
 	private Map<String, AbstractMessageListenerContainer> queueListenerMap = new HashMap<>();

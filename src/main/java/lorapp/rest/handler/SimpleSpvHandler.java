@@ -28,7 +28,6 @@ public class SimpleSpvHandler implements MessageListener {
 
     private JacksonService jacksonService = (JacksonService) SpringContextUtil.getBean("jacksonService");
     private AlarmRepo alarmRepo = (AlarmRepo) SpringContextUtil.getBean("alarmRepo");
-    private Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
 
     private SimpleSupervision simpleSpv;
 
@@ -45,26 +44,21 @@ public class SimpleSpvHandler implements MessageListener {
         float metricThreshold = this.simpleSpv.getThreshold();
         String compartor = this.simpleSpv.getComparator();
 
-        try {
-            UploadMessage uploadMessage = (UploadMessage) jackson2JsonMessageConverter.fromMessage(message);
-            Map msgAsMap = jacksonService.toObject(jacksonService.toJsonString(uploadMessage), Map.class);
-            float metricVal = (float) msgAsMap.get(metricName);
+        Map msgAsMap = jacksonService.toObject(new String(message.getBody()), Map.class);
+        double metricVal = (double) msgAsMap.get(metricName);
 
-            if(alarmShouldBeTriggered(metricVal, metricThreshold, compartor)){
-                Alarm alarm = new Alarm(this.simpleSpv.getAppEui(), this.simpleSpv.getDevEui(),
-                        new StringBuilder("Actual value:").append(metricVal)
-                                .append(" ").append(compartor).append(" threshold:")
-                                .append(metricThreshold).toString());
-                alarmRepo.save(alarm);
-                //trigger web socket
-                AlarmHandlerCollection.invokeHandlers(alarm);
-            }
-        } catch (JsonProcessingException e) {
-            LOGGER.error(e.getMessage());
+        if(alarmShouldBeTriggered(metricVal, metricThreshold, compartor)){
+            Alarm alarm = new Alarm(this.simpleSpv.getAppEui(), this.simpleSpv.getDevEui(),
+                    new StringBuilder("Actual value:").append(metricVal)
+                            .append(" ").append(compartor).append(" threshold:")
+                            .append(metricThreshold).toString());
+            alarmRepo.save(alarm);
+            //trigger web socket
+            AlarmHandlerCollection.invokeHandlers(alarm);
         }
     }
 
-    private boolean alarmShouldBeTriggered(float metricVal, float metricThreshold, String compartor){
+    private boolean alarmShouldBeTriggered(double metricVal, double metricThreshold, String compartor){
         if("=".equals(compartor)){
             return metricVal == metricThreshold;
         }else if(">=".equals(compartor)){
