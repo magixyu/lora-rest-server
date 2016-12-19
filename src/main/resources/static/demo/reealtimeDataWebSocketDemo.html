@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>WebSocket Demo</title>
+    <title>Realtime Data WebSocket Demo</title>
 </head>
 
 <body>
@@ -17,6 +17,7 @@ Welcome<br/>
 
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
+        debugger
         websocket = new WebSocket("ws://localhost:8080/websocket/realtimedata?appEui=2c26c501c0000001&devEui=4a7700660000a1");
     }
     else{

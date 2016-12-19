@@ -4,6 +4,7 @@ import lorapp.db.supervision.enity.Alarm;
 import lorapp.rest.handler.AlarmHandler;
 import lorapp.rest.handler.AlarmHandlerCollection;
 import lorapp.rest.service.JacksonService;
+import lorapp.rest.util.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,8 @@ public class SimpleSpvAlarmWebSocket implements AlarmHandler{
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleSpvAlarmWebSocket.class);
 
 /*    @Autowired
-    RealtimedataMQSubscribeService realtimedataMQSubscribeService;*/
-    @Autowired
-    JacksonService jacksonService;
+    JacksonService jacksonService;*/
+    private JacksonService jacksonService = (JacksonService) SpringContextUtil.getBean("jacksonService");
     
     private Session session;
 

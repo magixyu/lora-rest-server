@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lorapp.db.supervision.enity.SimpleSupervision;
 import lorapp.db.supervision.repo.SimpleSupervisionRepo;
 import lorapp.rest.service.JacksonService;
-import lorapp.rest.service.mq.MQConfig;
 import lorapp.rest.service.mq.SpvMQSubscribeService;
 import lorapp.rest.util.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +20,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/simpleSpv")
-public class SupervisionController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(SupervisionController.class);
+public class SimpleSpvController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(SimpleSpvController.class);
 
     @Autowired
     SimpleSupervisionRepo simpleSupervisionRepo;
