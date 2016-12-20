@@ -34,6 +34,6 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
               '/**' can intercept '/rawdata', '/rawdata/appEUI1/devEUI1/all'
                                   '/demo.html', '/demoDir/demo.html'
          */
-        registry.addInterceptor(urlSecurityInterceptor()).addPathPatterns("/**/*").excludePathPatterns(LOGIN_API, LOGIN_URL, DEV_API_EXCLUDE);
+        registry.addInterceptor(urlSecurityInterceptor()).addPathPatterns("/**").excludePathPatterns(LOGIN_API, LOGIN_URL, DEV_API_EXCLUDE);
     }
 }
