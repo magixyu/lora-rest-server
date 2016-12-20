@@ -152,13 +152,4 @@ public class UserController {
         return String.valueOf(Base64Utils.encode(md.digest(passwd.getBytes())));
     }
 
-    public static void main(String[] args){
-        try {
-            System.out.println(UserController.getMD5Code("123456"));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
