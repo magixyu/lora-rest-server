@@ -10,6 +10,7 @@ import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -149,7 +150,21 @@ public class UserController {
 
     private static String getMD5Code(String passwd) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
-        return String.valueOf(Base64Utils.encode(md.digest(passwd.getBytes())));
+        byte[] pwdInBytes = md.digest(passwd.getBytes());
+
+        StringBuffer buffer = new StringBuffer();
+        for (byte b : pwdInBytes) {
+            int number = b & 0xff;
+            String str = Integer.toHexString(number);
+            if (str.length() == 1) {
+                buffer.append("0");
+            }
+            buffer.append(str);
+        }
+        return buffer.toString();
     }
 
+    /*public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println(UserController.getMD5Code("a"));
+    }*/
 }

@@ -40,8 +40,6 @@ public class SpvMQSubscribeService {
 
 
     public void newSubsription4SimpleSpv(SimpleSupervision spv) {
-        SpringContextUtil.getBean("simpleSupervisionRepo");
-
         String queueName = getQueueName(spv);
         String bindKey = spv.getAppEui() + "." + spv.getDevEui();
 

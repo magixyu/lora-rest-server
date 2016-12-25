@@ -18,6 +18,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
     public final static String LOGIN_URL = "/login/login.html";
     public final static String LOGIN_API = "/login";
     public final static String ADMIN_DIR = "/admin";
+    public final static String SWAGGER_UI = "/swagger-ui.html";
     public final static String DEV_API_EXCLUDE = "/simpleSpv/creation";
 
     @Bean
@@ -34,6 +35,6 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
               '/**' can intercept '/rawdata', '/rawdata/appEUI1/devEUI1/all'
                                   '/demo.html', '/demoDir/demo.html'
          */
-        registry.addInterceptor(urlSecurityInterceptor()).addPathPatterns("/**").excludePathPatterns(LOGIN_API, LOGIN_URL, DEV_API_EXCLUDE);
+        registry.addInterceptor(urlSecurityInterceptor()).addPathPatterns("/**").excludePathPatterns(LOGIN_API, LOGIN_URL, SWAGGER_UI, DEV_API_EXCLUDE);
     }
 }
