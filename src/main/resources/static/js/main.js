@@ -102,8 +102,34 @@ initialization can be disabled and Layout.init() should be called on page load c
 
 /* Setup Layout Part - Header */
 MetronicApp.controller('HeaderController', ['$scope', function($scope) {
+    //demo data
+    $scope.alarmsInHeader = [
+        {appEUI:"testApp1", devEUI:'testDev1', reason:'Temperature value 120 > 40', raiseTime:'2017-01-21 00:01:12'},
+        {appEUI:"testApp1", devEUI:'testDev2', reason:'Temperature value 110 > 40', raiseTime:'2017-01-22 11:01:12'}
+    ];
+//    $scope.alarmsInHeader = [];
+
+    var alarmWebSocket = null;
+    //set up alarm web socket
+    if('WebSocket' in window){
+        debugger
+        alarmWebSocket = new WebSocket("ws://localhost:8089/websocket/simpleSpvAlarm");
+    }else{
+        alert('Not support websocket')
+    }
+    //连接成功建立的回调方法
+    alarmWebSocket.onopen = function(event){
+        console.log('alarm web socket connected.');
+    }
+    //接收到消息的回调方法
+    alarmWebSocket.onmessage = function(event){
+        $scope.alarmsInHeader.push(event.data);
+    }
+
+
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
+        alert("HeaderController loaded");
     });
 }]);
 

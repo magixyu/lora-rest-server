@@ -49,7 +49,7 @@ public class SimpleSpvHandler implements MessageListener {
 
         if(alarmShouldBeTriggered(metricVal, metricThreshold, compartor)){
             Alarm alarm = new Alarm(this.simpleSpv.getAppEui(), this.simpleSpv.getDevEui(),
-                    new StringBuilder("Actual value:").append(metricVal)
+                    new StringBuilder(metricName).append(" value:").append(metricVal)
                             .append(" ").append(compartor).append(" threshold:")
                             .append(metricThreshold).toString());
             alarmRepo.save(alarm);
